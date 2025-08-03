@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Circular Profile with Text</title>
+    <link rel="stylesheet" href="circular-profile.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e3edf7;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            background: linear-gradient(90deg, #00bfff, #ff00ff);
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .demo-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .demo-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .demo-card h2 {
+            color: #00bfff;
+            margin-top: 0;
+        }
+
+        .demo-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .responsive-info {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f0f8ff;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        .device-size {
+            display: none;
+            font-weight: bold;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #00bfff, #ff00ff);
+            color: white;
+            display: inline-block;
+        }
+
+        /* Device indicators */
+        .desktop-only { display: none; }
+        .tablet-only { display: none; }
+        .mobile-only { display: none; }
+        .small-mobile-only { display: none; }
+
+        @media (min-width: 992px) {
+            .desktop-only { display: inline-block; }
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+            .tablet-only { display: inline-block; }
+        }
+
+        @media (min-width: 576px) and (max-width: 767px) {
+            .mobile-only { display: inline-block; }
+        }
+
+        @media (max-width: 575px) {
+            .small-mobile-only { display: inline-block; }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Responsive Circular Profile with Text</h1>
+            <p class="subtitle">A fully responsive implementation that works on all devices</p>
+        </header>
+
+        <div class="demo-section">
+            <div class="demo-card">
+                <h2>SVG Text Path Implementation</h2>
+                <p>This implementation uses SVG textPath for perfect circular text with responsive sizing</p>
+                
+                <div class="profile-container">
+                    <img src="nitesh.jpeg" alt="Profile" class="profile-image" />
+                    <div class="circle-border"></div>
+                    
+                    <svg class="circular-text" viewBox="0 0 400 400">
+                        <defs>
+                            <path id="circle-path" d="M 200, 200 m -160, 0 a 160,160 0 1,1 320,0 a 160,160 0 1,1 -320,0" />
+                            
+                            <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#00bfff" />
+                                <stop offset="50%" stop-color="#ff00ff" />
+                                <stop offset="100%" stop-color="#00bfff" />
+                            </linearGradient>
+                        </defs>
+                        
+                        <text class="gradient-text">
+                            <textPath xlink:href="#circle-path" startOffset="0%">
+                                I'm Frontend & I'm Designer • I'm Frontend & I'm Designer •
+                            </textPath>
+                        </text>
+                    </svg>
+                </div>
+
+                <div class="responsive-info">
+                    <p>This profile is fully responsive and will adjust to:</p>
+                    <span class="device-size desktop-only">Desktop Size</span>
+                    <span class="device-size tablet-only">Tablet Size</span>
+                    <span class="device-size mobile-only">Mobile Size</span>
+                    <span class="device-size small-mobile-only">Small Mobile Size</span>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Resize your browser window to see how the profile adapts to different screen sizes.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Handle image errors
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.profile-image');
+            images.forEach(img => {
+                img.onerror = function() {
+                    this.style.backgroundColor = '#f0f0f0';
+                    this.style.display = 'flex';
+                    this.style.justifyContent = 'center';
+                    this.style.alignItems = 'center';
+                    this.style.fontSize = '14px';
+                    this.style.fontWeight = 'bold';
+                    this.textContent = 'Profile';
+                };
+            });
+        });
+    </script>
+</body>
+</html>

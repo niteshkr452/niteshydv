@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile with Circular Text (CSS Transform)</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #e3edf7;
+            margin: 0;
+        }
+
+        .profile-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: auto;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .circle-border {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: calc(100% + 20px);
+            height: calc(100% + 20px);
+            border-radius: 50%;
+            z-index: 1;
+            background: conic-gradient(#00bfff 0% 25%, #ff00ff 25% 50%, transparent 50% 100%);
+        }
+
+        /* CSS Transform Circular Text */
+        .circular-text {
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            width: calc(100% + 60px);
+            height: calc(100% + 60px);
+            z-index: 3;
+            animation: rotate 20s linear infinite;
+        }
+
+        .circular-text span {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform-origin: 0 180px; /* Half the container width + padding */
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            .profile-container {
+                width: 200px;
+                height: 200px;
+            }
+
+            .circular-text span {
+                font-size: 12px;
+                transform-origin: 0 130px; /* Adjusted for smaller container */
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .profile-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            .circular-text span {
+                font-size: 10px;
+                transform-origin: 0 105px; /* Adjusted for smaller container */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <img src="nitesh.jpeg" alt="Profile" class="profile-image" />
+        <div class="circle-border"></div>
+        
+        <!-- Circular Text using CSS transforms -->
+        <div class="circular-text" id="circular-text"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const text = "I'm Frontend & I'm Designer • ";
+            const circularText = document.getElementById('circular-text');
+            const container = document.querySelector('.profile-container');
+            
+            // Create spans for each character
+            function createCircularText() {
+                circularText.innerHTML = ''; // Clear previous content
+                
+                // Duplicate the text to fill the circle
+                const fullText = text.repeat(2);
+                
+                for (let i = 0; i < fullText.length; i++) {
+                    const span = document.createElement('span');
+                    span.innerText = fullText[i];
+                    
+                    // Calculate the angle for each character
+                    const angle = (i * 360 / fullText.length);
+                    
+                    // Apply the rotation transform
+                    span.style.transform = `rotate(${angle}deg)`;
+                    
+                    circularText.appendChild(span);
+                }
+            }
+            
+            // Update text size and position based on container size
+            function updateTextSize() {
+                const containerWidth = container.offsetWidth;
+                const spans = document.querySelectorAll('.circular-text span');
+                
+                let transformOrigin;
+                let fontSize;
+                
+                if (containerWidth < 200) {
+                    transformOrigin = '0 105px'; // For small screens
+                    fontSize = '10px';
+                } else if (containerWidth < 300) {
+                    transformOrigin = '0 130px'; // For medium screens
+                    fontSize = '12px';
+                } else {
+                    transformOrigin = '0 180px'; // For large screens
+                    fontSize = '16px';
+                }
+                
+                spans.forEach(span => {
+                    span.style.transformOrigin = transformOrigin;
+                    span.style.fontSize = fontSize;
+                });
+            }
+            
+            // Initial creation and update
+            createCircularText();
+            updateTextSize();
+            
+            // Update on window resize
+            window.addEventListener('resize', function() {
+                createCircularText();
+                updateTextSize();
+            });
+        });
+    </script>
+</body>
+</html>

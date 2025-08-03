@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Circular Text - Showcase</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e3edf7;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            background: linear-gradient(90deg, #00bfff, #ff00ff);
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .showcase {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .implementation {
+            width: 350px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .implementation h2 {
+            margin-top: 0;
+            color: #00bfff;
+        }
+
+        .implementation p {
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .implementation-container {
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .view-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #00bfff, #ff00ff);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .view-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Basic Profile Container Styles */
+        .profile-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: auto;
+        }
+
+        .profile-image {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .circle-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            z-index: 1;
+            background: conic-gradient(#00bfff 0% 25%, #ff00ff 25% 50%, transparent 50% 100%);
+        }
+
+        /* Basic Implementation */
+        .basic .rotated-text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 250px;
+            font-weight: bold;
+            color: #000;
+            z-index: 3;
+        }
+
+        /* SVG Implementation */
+        .svg .circular-text {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: calc(100% + 40px);
+            height: calc(100% + 40px);
+            z-index: 3;
+            animation: rotate 20s linear infinite;
+        }
+
+        .svg .circular-text text {
+            font-size: 14px;
+            font-weight: bold;
+            fill: #333;
+        }
+
+        /* CSS Transform Implementation */
+        .css-transform .circular-text {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: calc(100% + 40px);
+            height: calc(100% + 40px);
+            z-index: 3;
+            animation: rotate 20s linear infinite;
+        }
+
+        .css-transform .circular-text span {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform-origin: 0 145px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* Advanced Implementation */
+        .advanced .circle-border {
+            animation: spin 20s linear infinite reverse;
+        }
+
+        .advanced .circular-text {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: calc(100% + 40px);
+            height: calc(100% + 40px);
+            z-index: 3;
+            animation: spin 30s linear infinite;
+        }
+
+        .advanced .circular-text text {
+            font-size: 14px;
+            font-weight: 600;
+            fill: url(#textGradient);
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .showcase {
+                gap: 20px;
+            }
+            
+            .implementation {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .showcase {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .implementation {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Profile Circular Text Implementations</h1>
+            <p class="subtitle">Compare different approaches to create circular text around a profile image</p>
+        </header>
+
+        <div class="showcase">
+            <!-- Basic Implementation -->
+            <div class="implementation">
+                <h2>Basic CSS</h2>
+                <p>Simple implementation using basic CSS positioning</p>
+                
+                <div class="implementation-container">
+                    <div class="profile-container basic">
+                        <img src="nitesh.jpeg" alt="Profile" class="profile-image" />
+                        <div class="circle-border"></div>
+                        <div class="rotated-text">I'm Frontend & I'm Designer</div>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <a href="profile-circular-text.html" class="view-button">View Full Example</a>
+                </div>
+            </div>
+
+            <!-- SVG Implementation -->
+            <div class="implementation">
+                <h2>SVG with textPath</h2>
+                <p>Advanced implementation using SVG for perfect circular text</p>
+                
+                <div class="implementation-container">
+                    <div class="profile-container svg">
+                        <img src="nitesh.jpeg" alt="Profile" class="profile-image" />
+                        <div class="circle-border"></div>
+                        
+                        <svg class="circular-text" viewBox="0 0 360 360">
+                            <defs>
+                                <path id="circle-path-1" d="M 180, 180 m -150, 0 a 150,150 0 1,1 300,0 a 150,150 0 1,1 -300,0" />
+                            </defs>
+                            <text>
+                                <textPath xlink:href="#circle-path-1" startOffset="0%">
+                                    I'm Frontend & I'm Designer • I'm Frontend & I'm Designer •
+                                </textPath>
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <a href="profile-circular-text.html" class="view-button">View Full Example</a>
+                </div>
+            </div>
+
+            <!-- CSS Transform Implementation -->
+            <div class="implementation">
+                <h2>CSS Transforms</h2>
+                <p>Implementation using CSS transforms for individual character placement</p>
+                
+                <div class="implementation-container">
+                    <div class="profile-container css-transform">
+                        <img src="nitesh.jpeg" alt="Profile" class="profile-image" />
+                        <div class="circle-border"></div>
+                        <div class="circular-text" id="circular-text-1"></div>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <a href="profile-circular-text-css.html" class="view-button">View Full Example</a>
+                </div>
+            </div>
+
+            <!-- Advanced Implementation -->
+            <div class="implementation">
+                <h2>Advanced SVG</h2>
+                <p>Polished implementation with gradient text and animations</p>
+                
+                <div class="implementation-container">
+                    <div class="profile-container advanced">
+                        <img src="nitesh.jpeg" alt="Profile" class="profile-image" />
+                        <div class="circle-border"></div>
+                        
+                        <svg class="circular-text" viewBox="0 0 400 400">
+                            <defs>
+                                <path id="circle-path-2" d="M 200, 200 m -160, 0 a 160,160 0 1,1 320,0 a 160,160 0 1,1 -320,0" />
+                                
+                                <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#00bfff" />
+                                    <stop offset="50%" stop-color="#ff00ff" />
+                                    <stop offset="100%" stop-color="#00bfff" />
+                                </linearGradient>
+                            </defs>
+                            
+                            <text class="gradient-text">
+                                <textPath xlink:href="#circle-path-2" startOffset="0%">
+                                    I'm Frontend & I'm Designer • I'm Frontend & I'm Designer •
+                                </textPath>
+                            </text>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <a href="profile-circular-text-advanced.html" class="view-button">View Full Example</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Check the README.md file for detailed instructions on how to use and customize these implementations.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle image errors
+            const images = document.querySelectorAll('.profile-image');
+            images.forEach(img => {
+                img.onerror = function() {
+                    this.style.backgroundColor = '#f0f0f0';
+                    this.style.display = 'flex';
+                    this.style.justifyContent = 'center';
+                    this.style.alignItems = 'center';
+                    this.style.fontSize = '14px';
+                    this.style.fontWeight = 'bold';
+                    this.textContent = 'Profile';
+                };
+            });
+            
+            // Create circular text using CSS transforms
+            const text = "I'm Frontend & I'm Designer • ";
+            const circularText = document.getElementById('circular-text-1');
+            
+            if (circularText) {
+                // Duplicate the text to fill the circle
+                const fullText = text.repeat(2);
+                
+                for (let i = 0; i < fullText.length; i++) {
+                    const span = document.createElement('span');
+                    span.innerText = fullText[i];
+                    
+                    // Calculate the angle for each character
+                    const angle = (i * 360 / fullText.length);
+                    
+                    // Apply the rotation transform
+                    span.style.transform = `rotate(${angle}deg)`;
+                    
+                    circularText.appendChild(span);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
